@@ -16,7 +16,7 @@ Identify high-impact sources of purchase friction, prioritize optimization oppor
 
 ## Live Prototype
 
-https://YOUR-GITHUB-PAGES-LINK
+[https://YOUR-GITHUB-PAGES-LINK](https://kimiabahramibm-tpm.github.io/wellbeing-cro-redesign/)
 
 ## Repository
 
