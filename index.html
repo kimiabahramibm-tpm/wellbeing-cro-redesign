@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Wellbeing Nutrition — CRO Prototype</title>
+
+  <style>
+    :root {
+      --green: #006b5d;
+      --green-dark: #004f45;
+      --green-soft: #eaf5f2;
+      --navy: #10213d;
+      --muted: #687583;
+      --border: #dfe7e5;
+      --soft: #f6f9f8;
+      --white: #ffffff;
+      --warning-soft: #fff8e8;
+      --shadow: 0 18px 50px rgba(16, 33, 61, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--navy);
+      background: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1280px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Announcement */
+
+    .sale-bar {
+      padding: 10px 16px;
+      color: white;
+      background: var(--green-dark);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Header */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--navy);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 20px;
+    }
+
+    /* Breadcrumb */
+
+    .breadcrumb {
+      padding: 20px 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 18px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(430px, 0.92fr);
+      gap: 72px;
+      align-items: start;
+    }
+
+    .product-copy {
+      padding-top: 14px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 18px 0 16px;
+      font-size: clamp(43px, 4.5vw, 68px);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-description {
+      max-width: 610px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .proof-row {
+      margin: 24px 0 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .proof-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .proof-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+    }
+
+    .stars {
+      color: var(--green);
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    /* Benefits */
+
+    .benefits {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .benefit {
+      min-height: 86px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: white;
+    }
+
+    .benefit-icon {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: var(--soft);
+      font-size: 19px;
+    }
+
+    .benefit strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    /* Clinical proof */
+
+    .clinical-card {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid #cfe2dd;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 17px;
+      align-items: center;
+      background: linear-gradient(
+        90deg,
+        #f3faf8 0%,
+        #ffffff 100%
+      );
+    }
+
+    .clinical-icon {
+      width: 52px;
+      height: 52px;
+      border: 1px solid #cfe2dd;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: white;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .clinical-copy small {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .clinical-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .clinical-stat strong {
+      color: var(--green);
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .clinical-stat span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .text-link {
+      border: 0;
+      padding: 8px 0;
+      color: var(--green);
+      background: transparent;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Purchase area */
+
+    .purchase-panel {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .purchase-label {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pack {
+      padding: 17px 18px;
+      border: 2px solid var(--green);
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+    }
+
+    .pack-title {
+      display: block;
+      font-weight: 800;
+    }
+
+    .pack-size {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pack-check {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .price-row {
+      margin: 19px 0 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 11px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .old-price {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .saving {
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .purchase-controls {
+      display: grid;
+      grid-template-columns: 142px minmax(0, 1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .quantity {
+      min-height: 56px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+    }
+
+    .quantity button {
+      width: 31px;
+      height: 31px;
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      background: var(--soft);
+      font-size: 20px;
+    }
+
+    .quantity span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .cta {
+      width: 100%;
+      min-height: 56px;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 11px;
+      color: white;
+      background: var(--green);
+      box-shadow: 0 9px 22px rgba(0, 107, 93, 0.18);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      transition:
+        background 160ms ease,
+        transform 160ms ease;
+    }
+
+    .cta:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .trust-row {
+      margin-top: 17px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .trust-icon {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .stock {
+      margin-top: 15px;
+      padding: 10px 13px;
+      border-radius: 9px;
+      color: var(--green);
+      background: #eff7f4;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .shipping-note {
+      margin-top: 11px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* Product gallery */
+
+    .gallery-shell {
+      position: sticky;
+      top: 116px;
+    }
+
+    .gallery-card {
+      padding: 28px 24px 22px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: #fbfcfc;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery {
+      text-align: center;
+    }
+
+    .main-product-image {
+      width: min(470px, 95%);
+      height: 530px;
+      margin: 0 auto 20px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .thumbnails {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .thumbnail {
+      width: 70px;
+      height: 63px;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      cursor: pointer;
+      transition:
+        border-color 160ms ease,
+        transform 160ms ease;
+    }
+
+    .thumbnail:hover {
+      transform: translateY(-2px);
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .thumbnail.active {
+      border: 2px solid var(--green);
+    }
+
+    .gallery-caption {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Decision reassurance */
+
+    .reassurance {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--soft);
+    }
+
+    .reassurance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .reassurance-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      text-align: left;
+    }
+
+    .reassurance-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: white;
+      font-weight: 800;
+    }
+
+    .reassurance-item strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .reassurance-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Sections */
+
+    .section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 3vw, 43px);
+      letter-spacing: -0.035em;
+    }
+
+    .section-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Clinical results */
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: white;
+    }
+
+    .result {
+      min-height: 180px;
+      padding: 28px 23px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .result:last-child {
+      border-right: 0;
+    }
+
+    .result strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 43px;
+      line-height: 1;
+    }
+
+    .result span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .result small {
+      margin-top: 10px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-action {
+      margin-top: 22px;
+    }
+
+    .secondary-button {
+      padding: 12px 18px;
+      border: 1px solid var(--green);
+      border-radius: 9px;
+      color: var(--green);
+      background: white;
+      font-weight: 800;
+    }
+
+    /* Ingredients */
+
+    .ingredients {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .ingredient {
+      min-height: 220px;
+      padding: 25px 20px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .ingredient-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 24px;
+    }
+
+    .ingredient b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .ingredient p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Research */
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .research-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .research-card small {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .research-card h3 {
+      margin: 10px 0 10px;
+      font-size: 19px;
+    }
+
+    .research-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Reviews */
+
+    .reviews-layout {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 28px;
+    }
+
+    .rating-summary {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--soft);
+    }
+
+    .rating-number {
+      display: block;
+      font-size: 58px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .rating-summary p {
+      color: var(--muted);
+    }
+
+    .review-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .review {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .review p {
+      margin: 12px 0;
+      color: var(--muted);
+    }
+
+    .verified {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    summary {
+      padding: 18px 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    details p {
+      max-width: 850px;
+      margin: 0;
+      padding: 0 20px 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 34px 20px 110px;
+      color: var(--muted);
+      background: var(--soft);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* Sticky purchase bar */
+
+    .sticky-cart {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 25;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 -10px 30px rgba(16, 33, 61, 0.1);
+      backdrop-filter: blur(12px);
+      transform: translateY(110%);
+      transition: transform 220ms ease;
+    }
+
+    .sticky-cart.visible {
+      transform: translateY(0);
+    }
+
+    .sticky-inner {
+      min-height: 82px;
+      display: grid;
+      grid-template-columns: 1fr auto auto 310px;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .sticky-product {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mini-product-image {
+      width: 48px;
+      height: 58px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      object-fit: contain;
+      background: white;
+    }
+
+    .sticky-product small {
+      color: var(--muted);
+    }
+
+    .sticky-price {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .sticky-price span {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: line-through;
+    }
+
+    .sticky-cart .quantity {
+      width: 132px;
+      min-height: 48px;
+    }
+
+    .sticky-cart .cta {
+      min-height: 50px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1050px) {
+      .hero-grid {
+        grid-template-columns: 1fr 0.85fr;
+        gap: 42px;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .clinical-card {
+        grid-template-columns: auto 1fr;
+      }
+
+      .clinical-card .text-link {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .reassurance-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .results,
+      .ingredients {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .result:nth-child(2) {
+        border-right: 0;
+      }
+
+      .result:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-inner {
+        grid-template-columns: 1fr auto 260px;
+      }
+
+      .sticky-cart .quantity {
+        display: none;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-copy {
+        order: 1;
+      }
+
+      .gallery-shell {
+        position: static;
+        order: 0;
+      }
+
+      .gallery-card {
+        padding: 20px;
+      }
+
+      .main-product-image {
+        height: 420px;
+      }
+
+      .purchase-controls {
+        grid-template-columns: 128px 1fr;
+      }
+
+      .reviews-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-inner {
+        grid-template-columns: 1fr 220px;
+      }
+
+      .sticky-price {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 30px, 1280px);
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .proof-divider {
+        display: none;
+      }
+
+      .benefits,
+      .results,
+      .ingredients,
+      .reassurance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .clinical-card {
+        grid-template-columns: 1fr;
+      }
+
+      .clinical-card .text-link {
+        grid-column: auto;
+      }
+
+      .purchase-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .quantity {
+        width: 100%;
+      }
+
+      .main-product-image {
+        height: 330px;
+      }
+
+      .result {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .result:last-child {
+        border-bottom: 0;
+      }
+
+      .sticky-inner {
+        grid-template-columns: 1fr;
+        padding: 10px 0;
+      }
+
+      .sticky-product {
+        display: none;
+      }
+
+      footer {
+        padding-bottom: 125px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sale-bar">
+    PAYDAY SALE IS LIVE! FLAT 10% OFF + EXTRA 5% OFF ON PREPAID
+  </div>
+
+  <header>
+    <div class="container nav">
+
+      <a class="brand" href="#">
+        <span class="brand-mark">W</span>
+        <span>Wellbeing Nutrition</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Product navigation">
+        <a href="#benefits">Benefits</a>
+        <a href="#evidence">Clinical Results</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#research">Research</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-actions" aria-label="Header actions">
+        <span aria-hidden="true">⌕</span>
+        <span aria-hidden="true">♡</span>
+        <span aria-hidden="true">🛒</span>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <div class="container breadcrumb">
+      Home › Collagen Peptides › Marine Collagen › Korean Marine Collagen Peptides
+    </div>
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="product-copy">
+
+          <span class="eyebrow">
+            ✓ Clinically proven
+          </span>
+
+          <h1>
+            Korean Marine Collagen Peptides
+          </h1>
+
+          <p class="hero-description">
+            Clinically studied marine collagen designed to reduce visible
+            wrinkles, improve skin elasticity, and support lasting hydration.
+          </p>
+
+          <div class="proof-row">
+
+            <div class="proof-item">
+              <span class="stars">★★★★★</span>
+              <span>4.8/5 from 65K+ reviews</span>
+            </div>
+
+            <span class="proof-divider" aria-hidden="true"></span>
+
+            <div class="proof-item">
+              <span>✓</span>
+              <span>65K+ units sold</span>
+            </div>
+
+          </div>
+
+          <div class="benefits" id="benefits">
+
+            <div class="benefit">
+              <span class="benefit-icon">◉</span>
+
+              <strong>
+                Reduces visible wrinkles
+              </strong>
+            </div>
+
+            <div class="benefit">
+              <span class="benefit-icon">✦</span>
+
+              <strong>
+                Improves skin elasticity
+              </strong>
+            </div>
+
+            <div class="benefit">
+              <span class="benefit-icon">◌</span>
+
+              <strong>
+                Supports skin hydration
+              </strong>
+            </div>
+
+          </div>
+
+          <div class="clinical-card">
+
+            <div class="clinical-icon">
+              ✓
+            </div>
+
+            <div class="clinical-copy">
+
+              <small>
+                Clinically studied over four weeks
+              </small>
+
+              <div class="clinical-stat">
+                <strong>53%</strong>
+
+                <span>
+                  more effective on fine lines and wrinkles*
+                </span>
+              </div>
+
+            </div>
+
+            <button
+              class="text-link"
+              type="button"
+              onclick="scrollToEvidence()"
+            >
+              View study
+            </button>
+
+          </div>
+
+          <div class="purchase-panel" id="purchase">
+
+            <p class="purchase-label">
+              Your selection
+            </p>
+
+            <div class="pack">
+
+              <div>
+                <span class="pack-title">1 Pack</span>
+                <span class="pack-size">200g · 25 servings</span>
+              </div>
+
+              <span class="pack-check">
+                ✓
+              </span>
+
+            </div>
+
+            <div class="price-row">
+              <span class="price">₹1,619</span>
+              <span class="old-price">₹1,799</span>
+              <span class="saving">Save 10%</span>
+            </div>
+
+            <div class="purchase-controls">
+
+              <div class="quantity" aria-label="Quantity selector">
+                <button
+                  type="button"
+                  onclick="changeQuantity(-1)"
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+
+                <span id="quantity">1</span>
+
+                <button
+                  type="button"
+                  onclick="changeQuantity(1)"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+
+              <button
+                class="cta"
+                type="button"
+                onclick="addToCart()"
+              >
+                ADD TO CART
+              </button>
+
+            </div>
+
+            <div class="trust-row">
+
+              <span class="trust-item">
+                <span class="trust-icon">✓</span>
+                Clinically proven
+              </span>
+
+              <span class="trust-item">
+                <span class="trust-icon">✓</span>
+                Ships today
+              </span>
+
+              <span class="trust-item">
+                <span class="trust-icon">✓</span>
+                30-day money-back guarantee
+              </span>
+
+            </div>
+
+            <div class="stock">
+              Only 31 left in stock
+            </div>
+
+            <div class="shipping-note">
+              Free shipping on all prepaid orders
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="gallery-shell">
+
+          <div class="gallery-card">
+
+            <div class="gallery">
+
+              <img
+                id="mainProductImage"
+                class="main-product-image"
+                src="001.webp"
+                alt="Wellbeing Nutrition Korean Marine Collagen Peptides"
+              >
+
+              <div
+                class="thumbnails"
+                aria-label="Product image gallery"
+              >
+
+                <button
+                  type="button"
+                  class="thumbnail active"
+                  onclick="changeProductImage('001.webp', this)"
+                  aria-label="View product image 1"
+                >
+                  <img
+                    src="001.webp"
+                    alt="Product view 1"
+                  >
+                </button>
+
+                <button
+                  type="button"
+                  class="thumbnail"
+                  onclick="changeProductImage('002.webp', this)"
+                  aria-label="View product image 2"
+                >
+                  <img
+                    src="002.webp"
+                    alt="Product view 2"
+                  >
+                </button>
+
+                <button
+                  type="button"
+                  class="thumbnail"
+                  onclick="changeProductImage('003.webp', this)"
+                  aria-label="View product image 3"
+                >
+                  <img
+                    src="003.webp"
+                    alt="Product view 3"
+                  >
+                </button>
+
+                <button
+                  type="button"
+                  class="thumbnail"
+                  onclick="changeProductImage('004.webp', this)"
+                  aria-label="View product image 4"
+                >
+                  <img
+                    src="004.webp"
+                    alt="Product view 4"
+                  >
+                </button>
+
+                <button
+                  type="button"
+                  class="thumbnail"
+                  onclick="changeProductImage('005.webp', this)"
+                  aria-label="View product image 5"
+                >
+                  <img
+                    src="005.webp"
+                    alt="Product view 5"
+                  >
+                </button>
+
+              </div>
+
+              <p class="gallery-caption">
+                Select an image to view product details and clinical information.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="reassurance">
+
+      <div class="container reassurance-grid">
+
+        <div class="reassurance-item">
+
+          <span class="reassurance-icon">✓</span>
+
+          <div>
+            <strong>Clinically studied</strong>
+            <span>Evidence-led formulation</span>
+          </div>
+
+        </div>
+
+        <div class="reassurance-item">
+
+          <span class="reassurance-icon">0</span>
+
+          <div>
+            <strong>No added sugar</strong>
+            <span>No artificial sweeteners</span>
+          </div>
+
+        </div>
+
+        <div class="reassurance-item">
+
+          <span class="reassurance-icon">◌</span>
+
+          <div>
+            <strong>Pure and unflavored</strong>
+            <span>Easy to add to drinks</span>
+          </div>
+
+        </div>
+
+        <div class="reassurance-item">
+
+          <span class="reassurance-icon">M</span>
+
+          <div>
+            <strong>Mercury free</strong>
+            <span>Heavy metal tested</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="evidence">
+
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-kicker">
+            Clinical evidence
+          </span>
+
+          <h2>
+            Results that support the purchase decision
+          </h2>
+
+          <p class="section-description">
+            The most relevant clinical outcomes are presented together so users
+            can validate the product claims without searching across the page.
+          </p>
+        </div>
+
+        <div class="results">
+
+          <div class="result">
+            <strong>53%</strong>
+            <span>
+              More effective on fine lines and wrinkles
+            </span>
+            <small>Four-week clinical trial</small>
+          </div>
+
+          <div class="result">
+            <strong>23%</strong>
+            <span>
+              More effective on skin evenness
+            </span>
+            <small>Measured clinical outcome</small>
+          </div>
+
+          <div class="result">
+            <strong>21%</strong>
+            <span>
+              More effective on skin elasticity
+            </span>
+            <small>Measured clinical outcome</small>
+          </div>
+
+          <div class="result">
+            <strong>198</strong>
+            <span>
+              Participants in the clinical study
+            </span>
+            <small>Published study</small>
+          </div>
+
+        </div>
+
+        <div class="section-action">
+          <button class="secondary-button" type="button">
+            Read full study
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="ingredients">
+
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-kicker">
+            Ingredients
+          </span>
+
+          <h2>
+            Clean ingredients, thoughtfully chosen
+          </h2>
+
+          <p class="section-description">
+            Ingredient origin, function, and formulation details are surfaced
+            in a single scannable section.
+          </p>
+        </div>
+
+        <div class="ingredients">
+
+          <article class="ingredient">
+            <div class="ingredient-icon">〰</div>
+
+            <b>Korean Marine Collagen</b>
+
+            <p>
+              Wild-caught marine collagen sourced from deep-sea fish in Korea.
+            </p>
+          </article>
+
+          <article class="ingredient">
+            <div class="ingredient-icon">⚛</div>
+
+            <b>Hydrolyzed Peptides</b>
+
+            <p>
+              Low-molecular-weight peptides designed for improved absorption.
+            </p>
+          </article>
+
+          <article class="ingredient">
+            <div class="ingredient-icon">◌</div>
+
+            <b>Pure and Unflavored</b>
+
+            <p>
+              No fillers, artificial flavors, or unnecessary additives.
+            </p>
+          </article>
+
+          <article class="ingredient">
+            <div class="ingredient-icon">⚗</div>
+
+            <b>Clinically Studied</b>
+
+            <p>
+              Formulation supported by published collagen research.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="research">
+
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-kicker">
+            Scientific research
+          </span>
+
+          <h2>
+            Supporting evidence without hidden tabs
+          </h2>
+
+          <p class="section-description">
+            Research is presented as a vertical section, making it easier to
+            discover and evaluate.
+          </p>
+        </div>
+
+        <div class="research-grid">
+
+          <article class="research-card">
+            <small>Study year · 2015</small>
+
+            <h3>
+              Journal of Cosmetic Dermatology
+            </h3>
+
+            <p>
+              Examined oral collagen supplementation and changes in skin
+              moisture and collagen structure.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <small>Study year · 2021</small>
+
+            <h3>
+              Randomized Clinical Study
+            </h3>
+
+            <p>
+              Evaluated marine collagen efficacy for wrinkles and skin
+              elasticity.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <small>Study year · 2022</small>
+
+            <h3>
+              Journal of Medicinal Food
+            </h3>
+
+            <p>
+              Investigated low-molecular-weight collagen peptides and visible
+              skin outcomes.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="reviews">
+
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-kicker">
+            Customer reviews
+          </span>
+
+          <h2>
+            Loved by thousands
+          </h2>
+
+          <p class="section-description">
+            Social proof is summarized clearly and supported by verified
+            customer feedback.
+          </p>
+        </div>
+
+        <div class="reviews-layout">
+
+          <div class="rating-summary">
+            <span class="rating-number">4.8</span>
+            <span class="stars">★★★★★</span>
+
+            <p>
+              Based on more than 65,000 customer reviews.
+            </p>
+
+            <strong>
+              94% would recommend this product
+            </strong>
+          </div>
+
+          <div class="review-list">
+
+            <article class="review">
+              <div class="stars">★★★★★</div>
+
+              <p>
+                “My skin feels more hydrated and my fine lines have visibly
+                reduced.”
+              </p>
+
+              <strong>Ananya S.</strong><br>
+              <span class="verified">✓ Verified Buyer</span>
+            </article>
+
+            <article class="review">
+              <div class="stars">★★★★★</div>
+
+              <p>
+                “The unflavored powder is easy to use and fits naturally into my
+                morning routine.”
+              </p>
+
+              <strong>Riya M.</strong><br>
+              <span class="verified">✓ Verified Buyer</span>
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="faq">
+
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-kicker">
+            FAQ
+          </span>
+
+          <h2>
+            Your questions, answered
+          </h2>
+
+          <p class="section-description">
+            High-intent questions are grouped into simple accordions to keep the
+            page concise.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+
+          <details>
+            <summary>
+              What is marine collagen?
+            </summary>
+
+            <p>
+              Marine collagen is sourced from fish and is commonly used to
+              support skin firmness, hydration, and elasticity.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              Who can take it?
+            </summary>
+
+            <p>
+              Adults who are not allergic to fish may use it as part of a daily
+              wellness routine. Consult a healthcare professional when needed.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              How do I use it?
+            </summary>
+
+            <p>
+              Mix one serving with water, juice, coffee, or a smoothie once
+              daily.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              How is it different from other collagen products?
+            </summary>
+
+            <p>
+              It uses hydrolyzed marine collagen peptides and an unflavored
+              formulation designed for convenient daily use.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              When will I see results?
+            </summary>
+
+            <p>
+              Consistent daily use for at least four weeks is recommended.
+              Individual outcomes may vary.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              Is it safe?
+            </summary>
+
+            <p>
+              Follow the usage instructions and consult a healthcare
+              professional if you have allergies, medical conditions, or other
+              concerns.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Wellbeing Nutrition CRO Prototype — Prepared by Kimia Bahrami Moqadam
+  </footer>
+
+  <div class="sticky-cart" id="stickyCart">
+
+    <div class="container sticky-inner">
+
+      <div class="sticky-product">
+
+        <img
+          class="mini-product-image"
+          src="001.webp"
+          alt="Korean Marine Collagen Peptides"
+        >
+
+        <div>
+          <strong>1 Pack</strong><br>
+          <small>200g · 25 servings</small>
+        </div>
+
+      </div>
+
+      <div class="sticky-price">
+        ₹1,619
+        <span>₹1,799</span>
+      </div>
+
+      <div class="quantity">
+
+        <button
+          type="button"
+          onclick="changeQuantity(-1)"
+          aria-label="Decrease quantity"
+        >
+          −
+        </button>
+
+        <span id="stickyQuantity">1</span>
+
+        <button
+          type="button"
+          onclick="changeQuantity(1)"
+          aria-label="Increase quantity"
+        >
+          +
+        </button>
+
+      </div>
+
+      <button
+        class="cta"
+        type="button"
+        onclick="addToCart()"
+      >
+        ADD TO CART
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    let quantity = 1;
+
+    function changeQuantity(change) {
+      quantity = Math.max(1, quantity + change);
+
+      document.getElementById("quantity").textContent = quantity;
+      document.getElementById("stickyQuantity").textContent = quantity;
+    }
+
+    function changeProductImage(imageName, selectedThumbnail) {
+      document.getElementById("mainProductImage").src = imageName;
+
+      document
+        .querySelectorAll(".thumbnail")
+        .forEach(function (thumbnail) {
+          thumbnail.classList.remove("active");
+        });
+
+      selectedThumbnail.classList.add("active");
+    }
+
+    function addToCart() {
+      alert(quantity + " item(s) added to cart.");
+    }
+
+    function scrollToEvidence() {
+      document
+        .getElementById("evidence")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+    }
+
+    const purchasePanel = document.getElementById("purchase");
+    const stickyCart = document.getElementById("stickyCart");
+
+    const purchaseObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            stickyCart.classList.remove("visible");
+          } else {
+            stickyCart.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.2
+      }
+    );
+
+    purchaseObserver.observe(purchasePanel);
+  </script>
+
+</body>
+</html>
